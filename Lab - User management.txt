@@ -1,87 +1,87 @@
-use mysql;
+ï»¿use mysql;
 
--- ½Ğ¸ÕµÛ´y­z user, db, tables_priv µ¥¸ê®Æªíªº§@¥Î
+-- è«‹è©¦è‘—æè¿° user, db, tables_priv ç­‰è³‡æ–™è¡¨çš„ä½œç”¨
 show tables;
 
 
--- ÀËµø²{¦bªº¨Ï¥ÎªÌ²M³æ
+-- æª¢è¦–ç¾åœ¨çš„ä½¿ç”¨è€…æ¸…å–®
 select user, host, password from user;
 select host, db, user, select_priv, insert_priv, update_priv from db;
 select host, db, user, table_name, table_priv from tables_priv;
 
 
--- ·s¼W¤@­Ó·sªº¨Ï¥ÎªÌ:
+-- æ–°å¢ä¸€å€‹æ–°çš„ä½¿ç”¨è€…:
 grant usage on *.* to carl@'%' identified by 'Pa$$w0rd';
 
 
--- ¦U­Ó°O¿ı¦w¥şÅv­­ªº¸ê®Æªí¦³¦óÅÜ¤Æ?
+-- å„å€‹è¨˜éŒ„å®‰å…¨æ¬Šé™çš„è³‡æ–™è¡¨æœ‰ä½•è®ŠåŒ–?
 select user, host, password from user;
 select host, db, user, select_priv, insert_priv, update_priv from db;
 select host, db, user, table_name, table_priv from tables_priv;
 
--- ·s¼W¤@­Ó·sªº¨Ï¥ÎªÌ:
+-- æ–°å¢ä¸€å€‹æ–°çš„ä½¿ç”¨è€…:
 create user jeter identified by 'Pa$$w0rd';
 
 
--- ¦U­Ó°O¿ı¦w¥şÅv­­ªº¸ê®Æªí¦³¦óÅÜ¤Æ?
+-- å„å€‹è¨˜éŒ„å®‰å…¨æ¬Šé™çš„è³‡æ–™è¡¨æœ‰ä½•è®ŠåŒ–?
 select user, host, password from user;
 select host, db, user, select_priv, insert_priv, update_priv from db;
 select host, db, user, table_name, table_priv from tables_priv;
 
 
--- ¤U¦C«ü¥O¥i§_¦¨¥\°õ¦æ:
+-- ä¸‹åˆ—æŒ‡ä»¤å¯å¦æˆåŠŸåŸ·è¡Œ:
 grant usage on *.* to jeremy identified by 'Pa$$w0rd';
 grant usage on *.* to white;
 grant usage on *.* to Carl@'%' identified by 'Pa$$w0rd';
 
 
--- ¥t¥~¶}¤@­Ó"©R¦W´£¥Ü¦r¤¸", ¥H­è¤~ªº carl µn¤J
+-- å¦å¤–é–‹ä¸€å€‹"å‘½åæç¤ºå­—å…ƒ", ä»¥å‰›æ‰çš„ carl ç™»å…¥
 
 
--- À° carl ­«³]±K½X:
+-- å¹« carl é‡è¨­å¯†ç¢¼:
 set password for carl = password('Pa$$w0rd');
 
 
--- ¥H carl ªº¨­¥÷¹Á¸Õ¤U¦C«ü¥O, ¶¶§Q¶Ü? :(
+-- ä»¥ carl çš„èº«ä»½å˜—è©¦ä¸‹åˆ—æŒ‡ä»¤, é †åˆ©å—? :(
 select customerID, companyName from northwind.customers;
 
 
--- ±Â¤© carl ¥i¥H¬d¸ß northwind ¸ê®Æ®wªº©Ò¦³¸ê®Æªí
--- Æ[¹î¦U­Ó°O¿ıÅv­­ªº¸ê®Æªí¦³¦óÅÜ¤Æ.
+-- æˆäºˆ carl å¯ä»¥æŸ¥è©¢ northwind è³‡æ–™åº«çš„æ‰€æœ‰è³‡æ–™è¡¨
+-- è§€å¯Ÿå„å€‹è¨˜éŒ„æ¬Šé™çš„è³‡æ–™è¡¨æœ‰ä½•è®ŠåŒ–.
 grant select on northwind.* to carl;
 select host, db, user, select_priv, insert_priv, update_priv from db;
 select host, db, user, table_name, table_priv from tables_priv;
 
 
--- ­è¤~ªº carl, ¦A¦¸¸Õ¸Õ¤U¦C«ü¥O, ¶¶§Q¶Ü? :)
+-- å‰›æ‰çš„ carl, å†æ¬¡è©¦è©¦ä¸‹åˆ—æŒ‡ä»¤, é †åˆ©å—? :)
 select customerID, companyName from northwind.customers;
 
 
--- ¨º... ¥H¤Uªº«ü¥O©O...
+-- é‚£... ä»¥ä¸‹çš„æŒ‡ä»¤å‘¢...
 use northwind;
 update customers set companyName = 'Lab Company' where customerID = 'ALFKI';
 
 
--- ±Â¤© carl ¥i¥H update northwind ¸ê®Æ®wªº customers ¸ê®Æªí
--- Æ[¹î¦UÅv­­ªº¸ê®Æªí¦³¦óÅÜ¤Æ.
+-- æˆäºˆ carl å¯ä»¥ update northwind è³‡æ–™åº«çš„ customers è³‡æ–™è¡¨
+-- è§€å¯Ÿå„æ¬Šé™çš„è³‡æ–™è¡¨æœ‰ä½•è®ŠåŒ–.
 grant update on northwind.customers to carl;
 select host, db, user, select_priv, insert_priv, update_priv from db;
 select host, db, user, table_name, table_priv from tables_priv;
 
 
--- ¥H carl ªº¨­¥÷, ¦A¦¸¸Õ¸Õ¤U¦C«ü¥O, ¶¶§Q¶Ü? :)
+-- ä»¥ carl çš„èº«ä»½, å†æ¬¡è©¦è©¦ä¸‹åˆ—æŒ‡ä»¤, é †åˆ©å—? :)
 update customers set companyName = 'Lab Company' where customerID = 'ALFKI';
 
 
--- ¦¬¦^ carl ¹ï©ó customers ¸ê®Æªíªº update Åv­­
+-- æ”¶å› carl å°æ–¼ customers è³‡æ–™è¡¨çš„ update æ¬Šé™
 revoke update on northwind.customers from carl;
 select user, host, password from mysql.user;
 select host, db, user, select_priv, insert_priv, update_priv from db;
 select host, db, user, table_name, table_priv from tables_priv;
 
 
--- ³sÄò°Ê§@...
--- «Ø¥ßµn¤J¨Ï¥ÎªÌ±b¸¹, ¦P®É¤@¨Ö±Â¤© customers ¸ê®Æªíªº update Åv­­
+-- é€£çºŒå‹•ä½œ...
+-- å»ºç«‹ç™»å…¥ä½¿ç”¨è€…å¸³è™Ÿ, åŒæ™‚ä¸€ä½µæˆäºˆ customers è³‡æ–™è¡¨çš„ update æ¬Šé™
 grant update on northwind.customers to cathy@winxp identified by 'Pa$$w0rd';
 select host, db, user, select_priv, insert_priv, update_priv from db;
 select host, db, user, table_name, table_priv from tables_priv;
